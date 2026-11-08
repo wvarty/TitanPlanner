@@ -295,6 +295,11 @@ namespace MissionPlanner
 
         public MAV_AUTOPILOT apname { get; set; }
 
+        /// <summary>
+        /// HEARTBEAT custom_mode, which TitanLRS components set to their marker
+        /// </summary>
+        public uint apcustommode { get; set; }
+
         public bool isHighLatency { get; set; }
 
         public bool CANNode { get; set; } = false;

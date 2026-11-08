@@ -1164,6 +1164,7 @@ Mission Planner waits for 2 valid heartbeat packets before connecting
             mavlinkversion = hb.mavlink_version;
             MAVlist[message.sysid, message.compid].aptype = (MAV_TYPE) hb.type;
             MAVlist[message.sysid, message.compid].apname = (MAV_AUTOPILOT) hb.autopilot;
+            MAVlist[message.sysid, message.compid].apcustommode = hb.custom_mode;
 
             setAPType(message.sysid, message.compid);
 
@@ -5408,6 +5409,7 @@ Mission Planner waits for 2 valid heartbeat packets before connecting
                                 MAVlist.Create(sysid, compid);
                                 MAVlist[sysid, compid].aptype = (MAV_TYPE)hb.type;
                                 MAVlist[sysid, compid].apname = (MAV_AUTOPILOT)hb.autopilot;
+                                MAVlist[sysid, compid].apcustommode = hb.custom_mode;
                                 setAPType(sysid, compid);
                                 _MAVDetected?.Invoke(this, (sysid, compid));
                             }
@@ -6773,6 +6775,11 @@ Mission Planner waits for 2 valid heartbeat packets before connecting
             return true;
         }
 
+        /// <summary>
+        /// HEARTBEAT custom_mode of TitanLRS components, ASCII "TLRS"
+        /// </summary>
+        public const uint TitanLRSHeartbeatMarker = 0x544C5253;
+
         public void setAPType(uint sysid, byte compid)
         {
             MAVlist[sysid, compid].sysid = sysid;
@@ -6887,6 +6894,11 @@ Mission Planner waits for 2 valid heartbeat packets before connecting
 
                 case MAV_AUTOPILOT.PX4:
                     MAVlist[sysid, compid].cs.firmware = Firmwares.PX4;
+                    break;
+
+                // A TitanLRS TX or receiver: not an autopilot, with "TLRS" as its custom_mode
+                case MAV_AUTOPILOT.INVALID when MAVlist[sysid, compid].apcustommode == TitanLRSHeartbeatMarker:
+                    MAVlist[sysid, compid].cs.firmware = Firmwares.TitanLRS;
                     break;
 
                 default:

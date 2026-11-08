@@ -168,6 +168,9 @@ namespace MissionPlanner.Utilities
         {
             string paramMetaDataXMLFileName =
                 String.Format("{0}{1}", Settings.GetDataDirectory(), vehicle + ".apm.pdef.xml");
+            // TitanLRS's metadata ships with the planner, there is nothing to download
+            if (vehicle == "TitanLRS")
+                paramMetaDataXMLFileName = Path.Combine(Settings.GetRunningDirectory(), "TitanLRS.apm.pdef.xml");
 
             try
             {

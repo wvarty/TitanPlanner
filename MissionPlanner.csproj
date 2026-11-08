@@ -840,6 +840,9 @@
     <Content Include="ParameterMetaDataBackup.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TitanLRS.apm.pdef.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Update="adb.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

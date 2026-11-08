@@ -14,6 +14,7 @@
         Gimbal,
         PX4,
         Other,
-        AP_Periph
+        AP_Periph,
+        TitanLRS
     }
 }

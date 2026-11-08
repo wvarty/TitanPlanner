@@ -651,6 +651,9 @@
     <None Update="ParameterMetaDataBackup.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TitanLRS.apm.pdef.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="quaternion.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
